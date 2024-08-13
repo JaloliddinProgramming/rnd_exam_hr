@@ -36,6 +36,21 @@ create or replace package body Ui_Exam5 is
                    Array_Varchar2('A', 'P'),
                    Array_Varchar2(Ui.t_Active, Ui.t_Passive));
   
+    q.Option_Field('gender_name',
+                   'state',
+                   Array_Varchar2('M', 'F'),
+                   Array_Varchar2('Male', 'Female'));
+  
+    q.Refer_Field(i_Name             => 'job_name',
+                  i_For              => 'job_id',
+                  i_Table_Name       => 'hr_jobs',
+                  i_Code_Field       => 'job_id',
+                  i_Name_Field       => 'job_name',
+                  i_Table_For_Select => 'select * from hr_jobs j
+                                          where j.company_id = :company_id
+                                          order by job_name',
+                  i_Manual_Sort      => false);
+  
     return q;
   end;
 

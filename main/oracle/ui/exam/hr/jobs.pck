@@ -21,7 +21,7 @@ create or replace package body Ui_Exam1 is
     r_Data Hr_Jobs%rowtype;
   begin
     r_Data := z_Hr_Jobs.Load(i_Company_Id => Ui.Company_Id, i_Job_Id => p.r_Number('job_id'));
-  
+    
     return z_Hr_Jobs.To_Map(r_Data, z.Job_Id, z.Job_Name, z.State);
   end;
 

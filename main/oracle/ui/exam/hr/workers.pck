@@ -8,7 +8,7 @@ create or replace package Ui_Exam4 is
   ----------------------------------------------------------------------------------------------------
   Function Add(p Hashmap) return Hashmap;
   ----------------------------------------------------------------------------------------------------
-  Function Ecit(p Hashmap) return Hashmap;
+  Function Edit(p Hashmap) return Hashmap;
 end Ui_Exam4;
 /
 create or replace package body Ui_Exam4 is
@@ -64,11 +64,13 @@ create or replace package body Ui_Exam4 is
                                   i_Person_Id  => p.r_Number('worker_id'));
     r_Worker := z_Hr_Workers.Load(i_Company_Id => Ui.Company_Id, i_Worker_Id => r_Person.Person_Id);
   
-    result := z_Hr_Workers.To_Map(r_Worker, z.Worker_Id, z.Job_Id, z.Gender, z.Birth_Date);
+    result := z_Hr_Workers.To_Map(r_Worker, z.Worker_Id, z.Gender, z.Birth_Date);
   
     Result.Put('name', r_Person.Name);
     Result.Put('selected_job_name',
                z_Hr_Jobs.Load(i_Company_Id => r_Worker.Company_Id, i_Job_Id => r_Worker.Job_Id).Job_Name);
+    Result.Put('selected_job_id',
+               z_Hr_Jobs.Load(i_Company_Id => r_Worker.Company_Id, i_Job_Id => r_Worker.Job_Id).Job_Id);
     Result.Put('photo_sha', r_Person.Photo_Sha);
     Result.Put('references', References);
   
@@ -91,7 +93,7 @@ create or replace package body Ui_Exam4 is
   end;
 
   ----------------------------------------------------------------------------------------------------
-  Function Ecit(p Hashmap) return Hashmap is
+  Function Edit(p Hashmap) return Hashmap is
   begin
     Hr_Api.Worker_Save(i_Company_Id => Ui.Company_Id,
                        i_Worker_Id  => p.r_Number('worker_id'),

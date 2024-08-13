@@ -92,7 +92,7 @@
 <div class="b-content">
   <form name="form">
     <b-grid name="workers" required="worker_id, name, gender" on-check="onCheck(checked)" on-dblclick="onDblclick(row)"
-      sort="name" search="name" searchable="worker_id" extra-columns="worker_id">
+      sort="name" search="name, job_name" searchable="worker_id" extra-columns="worker_id">
       <b-row>
         <b-col name="name" as-html="worker_html" size="11" />
         <b-col name="birth_date" size="6" />
@@ -111,10 +111,10 @@
         </button>
       </b-action>
 
-      <!-- Grid filter block -->
-      <b-filter name="job_name" />
-      <!-- <b-filter name="state"/> -->
-      <!-- <b-filter name="column4" decorate-with="column4_name"/> -->
+      <b-filter name="name" />
+      <b-filter name="birth_date" />
+      <b-filter name="gender" decorate-with="gender_name" />
+      <b-filter name="job_id" decorate-with="job_name"/>
     </b-grid>
   </form>
   <!-- Modal -->

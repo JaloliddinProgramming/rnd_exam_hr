@@ -2,6 +2,8 @@ create or replace package Ui_Exam5 is
   ----------------------------------------------------------------------------------------------------
   Function Query_Workers return Fazo_Query;
   ----------------------------------------------------------------------------------------------------
+  Procedure Del(p Hashmap);
+  ----------------------------------------------------------------------------------------------------
   Function Add_Score(p Hashmap) return Hashmap;
 end Ui_Exam5;
 /
@@ -34,7 +36,32 @@ create or replace package body Ui_Exam5 is
                    Array_Varchar2('A', 'P'),
                    Array_Varchar2(Ui.t_Active, Ui.t_Passive));
   
+    q.Option_Field('gender_name',
+                   'state',
+                   Array_Varchar2('M', 'F'),
+                   Array_Varchar2('Male', 'Female'));
+  
+    q.Refer_Field(i_Name             => 'selected_job_name',
+                  i_For              => 'selected_job_id',
+                  i_Table_Name       => 'hr_jobs',
+                  i_Code_Field       => 'job_id',
+                  i_Name_Field       => 'job_name',
+                  i_Table_For_Select => 'select * from hr_jobs j
+                                          where j.company_id = :company_id
+                                          order by job_name',
+                  i_Manual_Sort      => false);
+  
     return q;
+  end;
+
+  ----------------------------------------------------------------------------------------------------
+  Procedure Del(p Hashmap) is
+    v_Workers_Ids Array_Number := p.r_Array_Number('worker_id');
+  begin
+    for i in 1 .. v_Workers_Ids.Count
+    loop
+      Hr_Api.Worker_Delete(i_Company_Id => Ui.Company_Id, i_Worker_Id => v_Workers_Ids(i));
+    end loop;
   end;
 
   ----------------------------------------------------------------------------------------------------

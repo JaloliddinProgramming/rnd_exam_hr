@@ -40,7 +40,7 @@ create or replace package body Ui_Exam2 is
                          on w.Worker_Id = p.Person_Id
                       where to_date(to_char(w.Birth_Date, ''DD-MON''), ''DD-MON'') between Trunc(sysdate) and
                             Trunc(sysdate) + 30
-                      order by to_date(to_char(w.Birth_Date, ''DD-MON''), ''DD-MON'')',
+                      order by to_date(to_char(w.Birth_Date, ''DD-MON''), ''DD-MON''), p.name',
                     Fazo.Zip_Map('company_id', Ui.Company_Id));
   
     q.Varchar2_Field('name', 'photo_sha', 'birth_date', 'gender');
@@ -60,7 +60,7 @@ create or replace package body Ui_Exam2 is
                          on s.Worker_Id = p.Person_Id
                        join Hr_Workers w
                          on s.Worker_Id = w.Worker_Id
-                      order by Score desc',
+                      order by Score desc, p.name',
                     Fazo.Zip_Map('company_id', Ui.Company_Id));
   
     q.Number_Field('place', 'score');

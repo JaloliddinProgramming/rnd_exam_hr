@@ -90,8 +90,11 @@
                 <t>Job list</t>
                 <r />
               </label><br />
-              <b-input local-data="q.jobs" limit="10" model="d.selected_job_name | job_name"
-                model-key="d.selected_job_id | job_id" on-select="onSelect(row)" required-key>
+              <b-input local-data="q.jobs" 
+                       limit="10" 
+                       model="d.selected_job_name | job_name"
+                       model-key="d.selected_job_id | job_id" 
+                       required-key>
                 {{ row.job_name }}
               </b-input>
             </div>

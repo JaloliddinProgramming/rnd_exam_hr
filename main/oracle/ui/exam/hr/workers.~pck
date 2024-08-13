@@ -8,7 +8,7 @@ create or replace package Ui_Exam4 is
   ----------------------------------------------------------------------------------------------------
   Function Add(p Hashmap) return Hashmap;
   ----------------------------------------------------------------------------------------------------
-  Function Ecit(p Hashmap) return Hashmap;
+  Function Edit(p Hashmap) return Hashmap;
 end Ui_Exam4;
 /
 create or replace package body Ui_Exam4 is
@@ -91,7 +91,7 @@ create or replace package body Ui_Exam4 is
   end;
 
   ----------------------------------------------------------------------------------------------------
-  Function Ecit(p Hashmap) return Hashmap is
+  Function Edit(p Hashmap) return Hashmap is
   begin
     Hr_Api.Worker_Save(i_Company_Id => Ui.Company_Id,
                        i_Worker_Id  => p.r_Number('worker_id'),

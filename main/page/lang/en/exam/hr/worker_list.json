@@ -1,15 +1,58 @@
 {
- "Add score": "Add score",
- "Add score to $1": "Add score to $1",
- "close": "close",
- "delete $1": "delete $1",
- "delete $1 worker(s)?": "delete $1 worker(s)",
- "delete worker $1?": "delete worker$1?",
- "Note": "Note",
- "save": "save",
- "Score": "Score",
- "workers.birth_date": "Birth date",
- "workers.job_name": "Job",
- "workers.name": "Name",
- "workers.worker_id": "ID"
+ "workers.gender": {
+  "translate": "Gender",
+  "generated": "N"
+ },
+ "Add score": {
+  "translate": "Add score",
+  "generated": "N"
+ },
+ "Add score to $1": {
+  "translate": "Add score to $1",
+  "generated": "N"
+ },
+ "close": {
+  "translate": "close",
+  "generated": "N"
+ },
+ "delete $1": {
+  "translate": "delete $1",
+  "generated": "N"
+ },
+ "delete $1 worker(s)?": {
+  "translate": "delete $1 worker(s)",
+  "generated": "N"
+ },
+ "delete worker $1?": {
+  "translate": "delete worker$1?",
+  "generated": "N"
+ },
+ "Note": {
+  "translate": "Note",
+  "generated": "N"
+ },
+ "save": {
+  "translate": "save",
+  "generated": "N"
+ },
+ "Score": {
+  "translate": "Score",
+  "generated": "N"
+ },
+ "workers.birth_date": {
+  "translate": "Birth date",
+  "generated": "N"
+ },
+ "workers.job_name": {
+  "translate": "Job",
+  "generated": "N"
+ },
+ "workers.name": {
+  "translate": "Name",
+  "generated": "N"
+ },
+ "workers.worker_id": {
+  "translate": "ID",
+  "generated": "N"
+ }
 }
