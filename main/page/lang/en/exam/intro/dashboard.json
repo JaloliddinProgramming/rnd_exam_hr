@@ -1,0 +1,46 @@
+{
+ "Birth dates": {
+  "translate": "Birth dates",
+  "generated": "N"
+ },
+ "birth_days.birth_date": {
+  "translate": "Birth date",
+  "generated": "N"
+ },
+ "birth_days.name": {
+  "translate": "Name",
+  "generated": "N"
+ },
+ "Report by gender": {
+  "translate": "Report by gender",
+  "generated": "N"
+ },
+ "report_by_gender.gender_name": {
+  "translate": "Gender",
+  "generated": "N"
+ },
+ "report_by_gender.percent": {
+  "translate": "Percent",
+  "generated": "N"
+ },
+ "report_by_gender.score": {
+  "translate": "Score",
+  "generated": "N"
+ },
+ "Top-10": {
+  "translate": "Top-10",
+  "generated": "N"
+ },
+ "top_scores.name": {
+  "translate": "Name",
+  "generated": "N"
+ },
+ "top_scores.place": {
+  "translate": "Place",
+  "generated": "N"
+ },
+ "top_scores.score": {
+  "translate": "Score",
+  "generated": "N"
+ }
+}

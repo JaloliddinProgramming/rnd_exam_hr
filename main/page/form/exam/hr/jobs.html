@@ -1,0 +1,41 @@
+<script biruni>
+  page.ctrl(function (scope, model) {
+    var d = model || {};
+    function save() {
+      if (page.valid(scope.form)) {
+        let data = _.pick(d, 'job_id', 'job_name', 'state');
+        page.post(':save', data).then(page.close, page.alert);
+      }
+    }
+    scope.d = d;
+  });
+</script>
+
+<div class="b-toolbar">
+  <button type="button" class="btn btn-primary" ng-click="save()" b-hotkey="save"><t>save</t></button>
+  <button type="button" class="btn btn-default" ng-click="page.close()"><t>{{page.close.title}}</t></button>
+</div>
+<div class="b-content"><form name="form">
+  <div class="form-row">
+    <div class="col-sm-12">
+      <div class="card card-custom">
+        <div class="card-body">
+          <div class="form-group">
+            <label><t>Job name</t><r/></label>
+            <input class="form-control" ng-model="d.job_name" required b-maxlength="100" />
+          </div>
+          <div class="form-group">
+            <labal><t>state</t></labal>
+            <label class="switch">
+              <input type="checkbox" ng-true-value="'A'" ng-false-value="'P'" ng-model="d.state" />
+              <span>
+                <div ng-if="d.state=='A'">active</div>
+                <div ng-if="d.state=='P'">passive</div>
+              </span>
+            </label>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</form></div>

@@ -1,0 +1,18 @@
+{
+ "Job name": {
+  "translate": "Nomi",
+  "generated": "N"
+ },
+ "save": {
+  "translate": "Saqlash",
+  "generated": "N"
+ },
+ "state": {
+  "translate": "Holat",
+  "generated": "N"
+ },
+ "{{page.close.title}}": {
+  "translate": "Yopish",
+  "generated": "N"
+ }
+}

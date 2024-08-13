@@ -1,0 +1,34 @@
+{
+ "Birth date": {
+  "translate": "Birth date",
+  "generated": "N"
+ },
+ "Female": {
+  "translate": "Female",
+  "generated": "N"
+ },
+ "Gender": {
+  "translate": "Gender",
+  "generated": "N"
+ },
+ "Job list": {
+  "translate": "Job list",
+  "generated": "N"
+ },
+ "Male": {
+  "translate": "Male",
+  "generated": "N"
+ },
+ "Name": {
+  "translate": "Name",
+  "generated": "N"
+ },
+ "save": {
+  "translate": "Save",
+  "generated": "N"
+ },
+ "{{ page.close.title }}": {
+  "translate": "Close",
+  "generated": "N"
+ }
+}

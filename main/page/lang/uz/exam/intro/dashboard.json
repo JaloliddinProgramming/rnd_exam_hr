@@ -1,0 +1,46 @@
+{
+ "Birth dates": {
+  "translate": "Tug'ilgan kunlar",
+  "generated": "N"
+ },
+ "birth_days.birth_date": {
+  "translate": "Tug'ilgan kun",
+  "generated": "N"
+ },
+ "birth_days.name": {
+  "translate": "Ism",
+  "generated": "N"
+ },
+ "Report by gender": {
+  "translate": "Jins bo'yicha hisobot",
+  "generated": "N"
+ },
+ "report_by_gender.gender_name": {
+  "translate": "Jins",
+  "generated": "N"
+ },
+ "report_by_gender.percent": {
+  "translate": "Ishchi sonidagi hissasi",
+  "generated": "N"
+ },
+ "report_by_gender.score": {
+  "translate": "Olgan ballda hissasi",
+  "generated": "N"
+ },
+ "Top-10": {
+  "translate": "Eng yuqori 10 o'rin",
+  "generated": "N"
+ },
+ "top_scores.name": {
+  "translate": "Ism",
+  "generated": "N"
+ },
+ "top_scores.place": {
+  "translate": "O'rin",
+  "generated": "N"
+ },
+ "top_scores.score": {
+  "translate": "Ball",
+  "generated": "N"
+ }
+}

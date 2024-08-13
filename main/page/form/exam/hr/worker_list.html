@@ -1,0 +1,158 @@
+<script biruni>
+  page.init(function () {
+    var genderClass = { M: 'male', F: 'female' };
+    function defaultPhoto(gender) {
+      return `page/resource/exam/no_photo_${genderClass[gender]}.png`;
+    }
+    page.grid('workers').asHtml('worker_html', 'photo_sha, name', function (row) {
+      return `<div><img src="${!row.photo_sha ? defaultPhoto(row.gender) : page.loadImageSmall(row.photo_sha)}" class="rounded-circle" style="width: 55px; height: 55px; border: 1px solid rgba(230, 230, 240, 0.8); object-fit: cover;"/>&emsp;${row.name}</div>`;
+    });
+  });
+  page.ctrl(function (scope, model, fi, t) {
+    var q = {}, p = {};
+
+    function closeIfDialog(result) {
+      if (page.isDialog()) page.close(result);
+    }
+
+    function add() {
+      fi.add(null, closeIfDialog);
+    }
+
+    function deleteOne(row) {
+      page.confirm(t('delete worker $1?')(row.name), function () {
+        fi.delete({ worker_id: row.worker_id }).then(page.reload, page.alert);
+      });
+    }
+
+    function deleteMany() {
+      page.confirm(t('delete $1 worker(s)?')(q.checked.size), function () {
+        fi.delete({ worker_id: _.pluck(q.checked.rows(), 'worker_id') }).then(page.reload, page.alert);
+      });
+    }
+
+    function edit(row) {
+      fi.edit({ worker_id: row.worker_id }, closeIfDialog);
+    }
+
+    function onDblclick(row) {
+      page.isDialog() ? page.close(row) : fi.edit ? edit(row) : null;
+    }
+
+    function onCheck(checked) {
+      q.checked = checked;
+    }
+
+    let modal = page.$content.find('form[name=modal]>.modal');
+
+    function showModal(row) {
+      p.data = angular.copy(row);
+      p.title = t('Add score to $1')(row.name);
+      p.index = row.worker_id;
+
+      // $timeout(function () {
+      modal.modal('show');
+      // });
+    }
+
+    function hideModal() {
+      modal.modal('hide');
+    }
+
+    function saveModal() {
+      if (page.valid(scope.modal)) {
+        let data = _.pick(p.data, ['worker_id', 'score', 'note']);
+        page.post(':save', data).then(hideModal, page.alert);
+      }
+    }
+
+    scope.q = q;
+    scope.p = p;
+  });
+</script>
+<div class="b-toolbar row">
+  <div class="col-sm-14">
+    <button type="button" class="btn btn-success" ng-click="add()" ng-if="fi.add" b-hotkey="add">{{ fi.add.title
+      }}</button>
+    <button type="button" class="btn btn-default px-4" ng-click="audit()" ng-if="fi.audit" b-toggle="tooltip"
+      title="{{ fi.audit.title }}" data-placement="bottom">
+      <i class="fas fa-history p-0"></i>
+    </button>
+    <button type="button" class="btn btn-danger" ng-click="deleteMany()" ng-if="fi.delete" ng-show="q.checked.has"
+      b-hotkey="delete">
+      <t p1="q.checked.size">delete $1</t>
+    </button>
+    <button type="button" class="btn btn-default" ng-click="page.close()" ng-hide="page.isFirst()">{{ page.close.title
+      }}</button>
+  </div>
+  <div class="col-sm-10 b-right">
+    <b-grid-controller name="workers" />
+  </div>
+</div>
+<div class="b-content">
+  <form name="form">
+    <b-grid name="workers" required="worker_id, name, gender" on-check="onCheck(checked)" on-dblclick="onDblclick(row)"
+      sort="name" search="name" searchable="worker_id" extra-columns="worker_id">
+      <b-row>
+        <b-col name="name" as-html="worker_html" size="11" />
+        <b-col name="birth_date" size="6" />
+        <b-col name="job_name" size="6" />
+      </b-row>
+
+      <b-action>
+        <button type="button" class="btn btn-default" ng-click="edit(row)" ng-if="fi.edit">{{ fi.edit.title }}</button>
+        <button type="button" class="btn btn-default" ng-click="deleteOne(row)" ng-if="fi.delete">{{ fi.delete.title
+          }}</button>
+        <button type="button" class="btn btn-default" ng-click="page.close(row)" ng-if="page.isDialog()">
+          <t>select</t>
+        </button>
+        <button class="btn btn-default" ng-click="showModal(row)">
+          <t>Add score</t>
+        </button>
+      </b-action>
+
+      <!-- Grid filter block -->
+      <b-filter name="job_name" />
+      <!-- <b-filter name="state"/> -->
+      <!-- <b-filter name="column4" decorate-with="column4_name"/> -->
+    </b-grid>
+  </form>
+  <!-- Modal -->
+  <form name="modal">
+    <div class="modal fade" tabindex="-1" role="dialog">
+      <div class="modal-dialog" role="journal">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" ng-bind-html="p.title"></h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">&times;</button>
+          </div>
+          <div class="modal-body">
+            <div class="form-group row">
+              <div class="col-sm-12">
+                <label>
+                  <t>Score</t>
+                  <r />
+                </label>
+                <input class="form-control" ng-model="p.data.score" b-maxlength="3" />
+              </div>
+            </div>
+            <div class="form-group">
+              <label>
+                <t>Note</t>
+              </label>
+              <textarea class="form-control" ng-model="p.data.note" b-maxlength="1000"></textarea>
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-primary" ng-click="saveModal()">
+              <t>save</t>
+            </button>
+            <button type="button" class="btn btn-default" data-dismiss="modal">
+              <t>close</t>
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </form>
+</div>

@@ -1,0 +1,84 @@
+<script biruni>
+  page.init(function() {
+    page.isInit() && page.query('jobs').filter('state', '=', 'A');
+  
+    var stateClass = { A: 'success', P: 'danger' };
+    page.grid('jobs').asHtml('state_html', 'state, state_name', row => {
+      return `<div class="alert alert-custom alert-light-${ stateClass[row.state] } text-center py-1 px-3 m-0"><div class="alert-text">${ row.state_name }</div></div>`;
+    });
+  });
+  page.ctrl(function(scope, model, fi, t) {
+    var q = {};
+  
+    function closeIfDialog(result){
+      if (page.isDialog()) page.close(result);
+    }
+  
+    function add() {
+      fi.add(null, closeIfDialog);
+    }
+  
+    function deleteOne(row) {
+      page.confirm(t('delete job $1?')(row.job_name), function() {
+        fi.delete({ job_id: row.job_id }).then(page.reload, page.alert);
+      });
+    }
+  
+    function deleteMany() {
+      page.confirm(t('delete $1 job(s)?')(q.checked.size), function() {
+        fi.delete({ job_id: _.pluck(q.checked.rows(), 'job_id') }).then(page.reload, page.alert);
+      });
+    }
+  
+    function edit(row) {
+      fi.edit({ job_id: row.job_id }, closeIfDialog);
+    }
+  
+    function onDblclick(row) {
+      page.isDialog() ? page.close(row) : fi.edit ? edit(row) : null;
+    }
+  
+    function onCheck(checked) {
+      q.checked = checked;
+    }
+  
+  
+    scope.q = q;
+  });
+  </script>
+<div class="b-toolbar row">
+  <div class="col-sm-14">
+    <button type="button" class="btn btn-success" ng-click="add()" ng-if="fi.add" b-hotkey="add">{{ fi.add.title }}</button>
+    <button type="button" class="btn btn-default px-4" ng-click="audit()" ng-if="fi.audit" b-toggle="tooltip" title="{{ fi.audit.title }}" data-placement="bottom">
+      <i class="fas fa-history p-0"></i>
+    </button>
+    <button type="button" class="btn btn-danger" ng-click="deleteMany()" ng-if="fi.delete" ng-show="q.checked.has" b-hotkey="delete">
+      <t p1="q.checked.size">delete $1</t>
+    </button>
+    <button type="button" class="btn btn-default" ng-click="page.close()" ng-hide="page.isFirst()">{{ page.close.title }}</button>
+  </div>
+  <div class="col-sm-10 b-right">
+    <b-grid-controller name="jobs"/>
+  </div>
+</div>
+<div class="b-content"><form name="form">
+  <b-grid name="jobs" required="job_id, job_name" on-check="onCheck(checked)" on-dblclick="onDblclick(row)"
+          sort="job_name" search="job_name" searchable="job_id" extra-columns="job_id">
+    <b-row>
+      <b-col name="job_name" size="17" b-maxlength="100"/>
+      <b-col name="state_name" as-html="state_html" size="6"/>
+    </b-row>
+
+    <b-action>
+      <button type="button" class="btn btn-default" ng-click="edit(row)" ng-if="fi.edit">{{ fi.edit.title }}</button>
+      <button type="button" class="btn btn-default" ng-click="deleteOne(row)" ng-if="fi.delete">{{ fi.delete.title }}</button>
+      <button type="button" class="btn btn-default" ng-click="page.close(row)" ng-if="page.isDialog()"><t>select</t></button>
+    </b-action>
+
+    <!-- Grid filter block -->
+    <b-filter name="job_name"/>
+    <b-filter name="state"/>
+    <!-- <b-filter name="column4" decorate-with="column4_name"/> -->
+  </b-grid>
+</form></div>
+  

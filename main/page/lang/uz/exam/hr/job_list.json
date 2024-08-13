@@ -1,0 +1,30 @@
+{
+ "delete $1": {
+  "translate": "O'chirish $1",
+  "generated": "N"
+ },
+ "delete job $1?": {
+  "translate": "$1 ishini o'chirish?",
+  "generated": "N"
+ },
+ "jobs.job_id": {
+  "translate": "ID",
+  "generated": "N"
+ },
+ "jobs.job_name": {
+  "translate": "Nomi",
+  "generated": "N"
+ },
+ "jobs.state": {
+  "translate": "Holati",
+  "generated": "N"
+ },
+ "jobs.state_name": {
+  "translate": "Holati",
+  "generated": "N"
+ },
+ "delete $1 job(s)?": {
+  "translate": "$1 ish oʻchirilsinmi?",
+  "generated": "N"
+ }
+}

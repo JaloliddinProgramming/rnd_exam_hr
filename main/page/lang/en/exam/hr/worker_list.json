@@ -1,0 +1,15 @@
+{
+ "Add score": "Add score",
+ "Add score to $1": "Add score to $1",
+ "close": "close",
+ "delete $1": "delete $1",
+ "delete $1 worker(s)?": "delete $1 worker(s)",
+ "delete worker $1?": "delete worker$1?",
+ "Note": "Note",
+ "save": "save",
+ "Score": "Score",
+ "workers.birth_date": "Birth date",
+ "workers.job_name": "Job",
+ "workers.name": "Name",
+ "workers.worker_id": "ID"
+}

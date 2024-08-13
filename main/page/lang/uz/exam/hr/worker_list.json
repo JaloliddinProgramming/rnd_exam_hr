@@ -1,0 +1,54 @@
+{
+ "Add score": {
+  "translate": "Ball qo'shish",
+  "generated": "N"
+ },
+ "Add score to $1": {
+  "translate": "$1ga ball qo'shish",
+  "generated": "N"
+ },
+ "close": {
+  "translate": "Yopish",
+  "generated": "N"
+ },
+ "delete $1": {
+  "translate": "O'chirish $1",
+  "generated": "N"
+ },
+ "delete $1 worker(s)?": {
+  "translate": "$1 ishchini o'chirish",
+  "generated": "N"
+ },
+ "delete worker $1?": {
+  "translate": "ishchi $1ni o'chirish",
+  "generated": "N"
+ },
+ "Note": {
+  "translate": "Izoh",
+  "generated": "N"
+ },
+ "save": {
+  "translate": "Saqlash",
+  "generated": "N"
+ },
+ "Score": {
+  "translate": "Ball",
+  "generated": "N"
+ },
+ "workers.birth_date": {
+  "translate": "Tug'ilgan kun",
+  "generated": "N"
+ },
+ "workers.job_name": {
+  "translate": "Ish o'rni",
+  "generated": "N"
+ },
+ "workers.name": {
+  "translate": "Ism",
+  "generated": "N"
+ },
+ "workers.worker_id": {
+  "translate": "ID",
+  "generated": "N"
+ }
+}

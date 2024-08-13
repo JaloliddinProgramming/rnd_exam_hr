@@ -1,0 +1,41 @@
+prompt Human Resources module
+prompt (c) 2024 Greenwhite solutions (www.greenwhite.uz)
+
+----------------------------------------------------------------------------------------------------
+create table hr_jobs(
+  company_id                      number(20)         not null,
+  job_id                          number(20)         not null,
+  job_name                        varchar2(100 char) not null,
+  state                           varchar2(1)        not null,
+  constraint hr_jobs_pk primary key (company_id, job_id) using index tablespace GWS_INDEX,
+  constraint hr_jobs_u1 unique (job_id) using index tablespace GWS_INDEX,
+  constraint hr_jobs_u2 unique (job_name) using index tablespace GWS_INDEX,
+  constraint hr_jobs_c1 check (job_name = trim(job_name)),
+  constraint hr_jobs_c2 check (state in ('A', 'P'))
+) tablespace GWS_DATA;
+
+comment on column hr_jobs.state is '(A)ctive, (P)assive';
+
+----------------------------------------------------------------------------------------------------
+create table hr_workers(
+  company_id                      number(20) not null,
+  worker_id                       number(20) not null,
+  job_id                          number(20) not null,
+  gender                          varchar2(1),
+  birth_date                      date,
+  constraint hr_workers_pk primary key (company_id, worker_id) using index tablespace GWS_INDEX,
+  constraint hr_workers_f1 foreign key (company_id, worker_id) references md_persons(company_id, person_id),
+  constraint hr_workers_c1 check (gender in ('M', 'F'))  
+) tablespace GWS_DATA;
+
+comment on column hr_workers.gender is '(M)ale, (F)emale';
+
+----------------------------------------------------------------------------------------------------
+create table hr_worker_scores(
+  company_id                      number(20) not null,
+  worker_id                       number(20) not null,
+  score                           number(3)  not null,
+  note                            varchar2(1000 char),
+  constraint hr_worker_scores_f1 foreign key (company_id, worker_id) references hr_workers(company_id, worker_id),
+  constraint hr_worker_scores_c1 check (score >= 0 and score <= 100)
+) tablespace GWS_DATA;

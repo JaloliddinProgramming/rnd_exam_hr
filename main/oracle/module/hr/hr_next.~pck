@@ -1,0 +1,14 @@
+create or replace package Hr_next is
+  ----------------------------------------------------------------------------------------------------
+  Function Job_id return number;
+end Hr_next;
+/
+create or replace package body Hr_next is
+  ----------------------------------------------------------------------------------------------------
+  Function Job_id return number is
+  begin
+    return hr_jobs_sq.Nextval;
+  end;
+
+end Cr_Next;
+/

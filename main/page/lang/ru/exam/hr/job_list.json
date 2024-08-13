@@ -1,0 +1,6 @@
+{
+ "delete $1 job(s)?": {
+  "translate": "удалить $1 вакансий?",
+  "generated": "N"
+ }
+}

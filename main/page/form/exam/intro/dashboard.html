@@ -1,0 +1,77 @@
+<script biruni>
+  page.init(function () {
+    var genderClass = { M: 'male', F: 'female' };
+    function defaultPhoto(gender) {
+      return `page/resource/exam/no_photo_${genderClass[gender]}.png`;
+    }
+    page.grid('birth_days').asHtml('worker_html', 'photo_sha, name', function (row) {
+      return `<div><img src="${!row.photo_sha ? defaultPhoto(row.gender) : page.loadImageSmall(row.photo_sha)}" class="rounded-circle" style="width: 55px; height: 55px; border: 1px solid rgba(230, 230, 240, 0.8); object-fit: cover;"/>&emsp;${row.name}</div>`;
+    });
+    page.grid('top_scores').asHtml('worker_html', 'photo_sha, name', function (row) {
+      return `<div><img src="${!row.photo_sha ? defaultPhoto(row.gender) : page.loadImageSmall(row.photo_sha)}" class="rounded-circle" style="width: 55px; height: 55px; border: 1px solid rgba(230, 230, 240, 0.8); object-fit: cover;"/>&emsp;${row.name}</div>`;
+    });
+  });
+</script>
+
+<div class="b-content">
+  <form class="name">
+    <div class="card card-custom">
+      <div class="card-body">
+        <ul class="nav nav-tabs nav-tabs-line" role="tablist">
+          <li class="nav-item">
+            <a data-target="#birth" class="nav-link active" data-toggle="tab" role="tab">
+              <span>
+                <t>Birth dates</t>
+              </span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a data-target="#top10" class="nav-link" data-toggle="tab" role="tab">
+              <span>
+                <t>Top-10</t>
+              </span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a data-target="#report" class="nav-link" data-toggle="tab" role="tab">
+              <span>
+                <t>Report by gender</t>
+              </span>
+            </a>
+          </li>
+        </ul>
+        <!-- Tabs -->
+        <div class="tab-content mt-4">
+          <!-- Birth Days -->
+          <div class="tab-pane active" id="birth" role="tabpanel">
+            <b-grid name="birth_days" required="gender">
+              <b-row>
+                <b-col name="name" as-html="worker_html" size="17"></b-col>
+                <b-col name="birth_date" size="7"></b-col>
+              </b-row>
+            </b-grid>
+          </div>
+          <!-- Top 10 -->
+          <div class="tab-pane" id="top10" role="tabpanel">
+            <b-grid name="top_scores" required="gender">
+              <b-row>
+                <b-col name="name" as-html="worker_html" size="12"/>
+                <b-col name="place" size="8"></b-col>
+                <b-col name="score" size="4"></b-col>
+              </b-row>
+            </b-grid>
+          </div>
+          <!-- Report -->
+          <div class="tab-pane" id="report" role="tabpanel">
+            <b-grid name="report_by_gender">
+              <b-row>
+                <b-col name="gender_name" size="12"/>
+                <b-col name="percent" size="8"></b-col>
+                <b-col name="score" size="4"></b-col>
+              </b-row>
+            </b-grid>
+          </div>
+        </div>
+      </div>
+  </form>
+</div>

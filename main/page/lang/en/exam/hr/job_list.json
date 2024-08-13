@@ -1,0 +1,30 @@
+{
+ "delete $1": {
+  "translate": "Delete $1",
+  "generated": "N"
+ },
+ "delete job $1?": {
+  "translate": "Delete job $1",
+  "generated": "N"
+ },
+ "jobs.job_id": {
+  "translate": "ID",
+  "generated": "N"
+ },
+ "jobs.job_name": {
+  "translate": "Name",
+  "generated": "N"
+ },
+ "jobs.state": {
+  "translate": "State",
+  "generated": "N"
+ },
+ "jobs.state_name": {
+  "translate": "State",
+  "generated": "N"
+ },
+ "delete $1 job(s)?": {
+  "translate": "delete $1 job(s)?",
+  "generated": "N"
+ }
+}

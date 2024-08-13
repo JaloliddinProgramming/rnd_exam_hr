@@ -1,0 +1,22 @@
+create or replace package Management is
+  ----------------------------------------------------------------------------------------------------
+  Function Version return varchar2 deterministic;
+  ----------------------------------------------------------------------------------------------------
+  Function Project_Code return varchar2 deterministic;
+end Management;
+/
+create or replace package body Management is
+  ----------------------------------------------------------------------------------------------------
+  Function Version return varchar2 deterministic is
+  begin
+    return '1.0.0';
+  end;
+
+  ----------------------------------------------------------------------------------------------------
+  Function Project_Code return varchar2 deterministic is
+  begin
+    return 'exam';
+  end;
+
+end Management;
+/

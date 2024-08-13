@@ -1,0 +1,126 @@
+<script biruni>
+  page.ctrl(function (scope, model) {
+    var d = model, q = {};
+    console.log(model);
+    setPhoto();
+
+    function defPhoto() {
+      var res = d.gender == 'F' ? 'fe' : '';
+      return {
+        'background-image': `url(page/resource/core/no_photo_${res}male.png)`,
+        'background-size': '95%'
+      };
+    }
+
+    function setPhoto() {
+      q.photo_src = d.photo_sha ? page.loadImage(d.photo_sha) : '';
+    }
+
+    function showImage() {
+      page.previewFile(d.photo || {
+        sha: d.photo_sha,
+        name: d.name,
+        type: 'image'
+      });
+    }
+
+    function removePhoto() {
+      d.photo_sha = null;
+      d.photo = null;
+      setPhoto();
+    }
+
+    function onSelect(row) {
+      d.selected_job_name = row.job_name;
+      d.selected_job_id = row.job_id;
+    }
+
+    q.jobs = _.mapRows(d.references.jobs, ['job_id', 'job_name']);
+
+    function save() {
+      if (page.valid(scope.form)) {
+        var data = _.pick(d, 'worker_id', 'name', 'selected_job_id', 'photo_sha', 'gender', 'birth_date');
+        if (d.photo) data.photo_sha = d.photo;
+        else data.photo_sha = d.photo_sha;
+        console.log(data);
+        page.post(':save', data).then(page.close, page.alert);
+      };
+    }
+
+    scope.d = d;
+    scope.q = q;
+
+  });
+</script>
+<div class="b-toolbar">
+  <button type="button" class="btn btn-primary" ng-click="save()" b-hotkey="save">
+    <t>save</t>
+  </button>
+  <button type="button" class="btn btn-default" ng-click="page.close()"><t>{{ page.close.title }}</t></button>
+</div>
+<div class="b-content">
+  <form name="form">
+    <div class="form-row">
+      <div class="col-sm-12">
+        <div class="card card-custom">
+          <div class="card-body">
+            <p>Image</p>
+            <div class="form-group text-center mt-4">
+              <div class="image-input image-input-outline bgi-position-center" ng-style="defPhoto()">
+                <div class="image-input-wrapper w-auto h-200px" ng-class="!d.photo && !q.photo_src && 'min-w-200px'">
+                  <img class="mw-100 mh-100 cursor-pointer" ng-click="showImage()" ngf-src="d.photo || q.photo_src"
+                    ng-if="d.photo || q.photo_src">
+                </div>
+                <a class="btn btn-icon btn-circle btn-white btn-hover-text-primary btn-shadow" data-action="change"
+                  b-cropper="d.photo">
+                  <i class="fa fa-pen icon-sm text-muted"></i>
+                </a>
+                <span class="btn btn-icon btn-circle btn-white btn-hover-text-primary btn-shadow" data-action="remove"
+                  ng-click="removePhoto()" ng-if="d.photo || q.photo_src">
+                  <i class="fa fa-times icon-sm text-muted"></i>
+                </span>
+              </div>
+            </div>
+            <div class="form-group">
+              <label><t>Name</t><r/></label>
+              <input class="form-control" ng-model="d.name" required b-maxlength="100" />
+            </div>
+            <div class="form-group">
+              <label>
+                <t>Job list</t>
+                <r />
+              </label><br />
+              <b-input local-data="q.jobs" limit="10" model="d.selected_job_name | job_name"
+                model-key="d.selected_job_id | job_id" on-select="onSelect(row)" required-key>
+                {{ row.job_name }}
+              </b-input>
+            </div>
+            <div class="form-group">
+              <label>
+                <t>Gender</t>
+              </label><br />
+              <label class="radio">
+                <input type="radio" name="gender" value="M" ng-model="d.gender" />
+                <span>
+                  <t>Male</t>
+                </span>
+              </label>
+              <label class="radio">
+                <input type="radio" name="gender" value="F" ng-model="d.gender" />
+                <span>
+                  <t>Female</t>
+                </span>
+              </label>
+            </div>
+            <div class="form-group">
+              <label>
+                <t>Birth date</t>
+              </label>
+              <input type="text" class="form-control" ng-model="d.birth_date" b-date-picker />
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </form>
+</div>

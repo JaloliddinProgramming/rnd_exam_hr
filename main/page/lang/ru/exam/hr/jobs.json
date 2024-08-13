@@ -1,0 +1,18 @@
+{
+ "Job name": {
+  "translate": "Имя",
+  "generated": "N"
+ },
+ "save": {
+  "translate": "Сохранять",
+  "generated": "N"
+ },
+ "state": {
+  "translate": "Состояние",
+  "generated": "N"
+ },
+ "{{page.close.title}}": {
+  "translate": "Закрыть",
+  "generated": "N"
+ }
+}

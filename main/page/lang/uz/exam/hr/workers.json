@@ -1,0 +1,34 @@
+{
+ "Birth date": {
+  "translate": "Tug'ilgan kun",
+  "generated": "N"
+ },
+ "Female": {
+  "translate": "Ayol",
+  "generated": "N"
+ },
+ "Gender": {
+  "translate": "Jins",
+  "generated": "N"
+ },
+ "Job list": {
+  "translate": "Ish",
+  "generated": "N"
+ },
+ "Male": {
+  "translate": "Erkak",
+  "generated": "N"
+ },
+ "Name": {
+  "translate": "Ism",
+  "generated": "N"
+ },
+ "save": {
+  "translate": "Saqlash",
+  "generated": "N"
+ },
+ "{{ page.close.title }}": {
+  "translate": "Yopish",
+  "generated": "N"
+ }
+}

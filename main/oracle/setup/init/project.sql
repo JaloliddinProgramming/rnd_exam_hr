@@ -1,0 +1,15 @@
+prompt exam project
+declare
+  v_Project_Code varchar2(10) := Exam.Project_Code;
+begin
+  Fazo_z.Compile_Invalid_Objects;
+  z_Md_Projects.Save_One(i_Project_Code      => v_Project_Code,
+                         i_Path_Prefix_Set   => v_Project_Code,
+                         i_Module_Prefix_Set => 'hr',
+                         i_Intro_Form        => '/exam/intro/dashboard',
+                         i_Visible           => 'Y',
+                         i_Parent_Code       => Core.Project_Code,
+                         i_Version           => Exam.Version);
+  commit;
+end;
+/
